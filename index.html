@@ -1,0 +1,186 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Feliz Cumple 25</title>
+<link href="https://fonts.googleapis.com/css2?family=Sunshiney&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#ffffed;--page:#e6e3da;--ink:#222;--red:#c85a5a;box-sizing:border-box}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#ffffed;--page:#e6e3da;--ink:#222}}
+:root[data-theme="dark"]{--bg:#ffffed;--page:#e6e3da;--ink:#222}
+html,body{height:100%;margin:0;overflow:hidden;background:var(--page);font-family:'Sunshiney','Comic Sans MS',cursive;color:var(--ink)}
+body{display:grid;place-items:center}
+#frame{position:relative;overflow:hidden;background:var(--bg);container-type:size;aspect-ratio:612/792;width:min(100vw,calc(100vh*612/792));width:min(100vw,calc(100dvh*612/792));box-shadow:0 0 40px #0002}
+img{display:block;max-width:100%}
+.scene{position:absolute;inset:0;transition:opacity 1.2s}
+.hidden{opacity:0;pointer-events:none}
+h1{position:absolute;inset:0;display:grid;place-items:center;text-align:center;font-size:8cqw;font-weight:400;margin:0;padding:0 5cqw;transition:opacity .8s;pointer-events:none}
+.pat{position:absolute;inset:0;opacity:0;transition:opacity 1.5s;pointer-events:none;overflow:hidden}
+.pat.on{opacity:1}.pat img{position:absolute;width:34cqw}
+#dim{position:absolute;inset:0;z-index:3;background:rgba(150,148,135,.82);opacity:0;pointer-events:none;transition:opacity .8s}
+#dim.on{opacity:1}
+.env{position:absolute;z-index:4;left:50%;top:54%;width:62cqw;aspect-ratio:396/281;transform:translate(-50%,-50%) translate(90cqw,-90cqh) rotate(14deg);transition:transform 2.6s cubic-bezier(.25,.8,.3,1);cursor:pointer;perspective:900px}
+.env.land{transform:translate(-50%,-50%)}
+.env>*{position:absolute}
+.back,.front,#pile{inset:0}
+.env svg{display:block;width:100%;height:100%}
+.flap{left:0;width:100%;top:-74.4%;height:74.4%;transform-origin:bottom;transform:rotateX(180deg);transition:transform .7s;z-index:7}
+.env.open .flap{transform:none;z-index:0}
+.front{z-index:5;pointer-events:none}.back{z-index:0}
+.seal{left:50%;top:50%;width:56%;transform:translate(-50%,-50%) rotate(-4deg);z-index:8;transition:opacity .4s;pointer-events:none}
+.env.open .seal{opacity:0}
+.dove{left:22%;top:-95%;width:150%;z-index:-1;transition:transform 1.8s ease-in;pointer-events:none}
+.dove.go{transform:translate(-200cqw,-60cqh) rotate(-12deg)}
+.it{position:absolute;z-index:var(--z);cursor:pointer;opacity:0;pointer-events:none;transform:translateY(70%) rotate(var(--r));transition:transform .8s cubic-bezier(.2,.9,.3,1.15) var(--d),opacity .5s var(--d)}
+.env.open .it{opacity:1;pointer-events:auto}
+.env.open .it,.env.open .it:hover{transform:rotate(var(--r))}
+.env.open .it:hover{transform:translateY(-6%) rotate(var(--r)) scale(1.07)}
+.it img{width:100%;filter:drop-shadow(0 3px 5px #0004)}
+.it.done::after{content:"✓";position:absolute;top:-1cqw;right:-1cqw;background:var(--red);color:#fff;border-radius:50%;width:4.5cqw;height:4.5cqw;display:grid;place-items:center;font-size:3cqw}
+.env.empty .it{opacity:0!important;transform:translateY(60%)!important;pointer-events:none}
+#msg{position:absolute;z-index:6;left:50%;transform:translateX(-50%);width:max-content;max-width:84cqw;top:calc(54% + 22cqw + 4cqw);text-align:center;font-size:4.8cqw;line-height:1.25;padding:.45em 1em;background:rgba(255,255,237,.94);border:.5cqw solid var(--ink);border-radius:3cqw;box-shadow:0 1cqw 0 #0002;transition:opacity .35s;opacity:0;pointer-events:none}
+#ov{position:absolute;inset:0;z-index:20;background:rgba(150,148,135,.86);opacity:0;pointer-events:none;transition:opacity .5s;cursor:pointer;overflow:hidden}
+#ov.on{opacity:1;pointer-events:auto}
+.center,.letter{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) scale(.6);opacity:0;transition:all .7s .15s;filter:drop-shadow(0 8px 14px #0005);z-index:1}
+.center{width:92cqw}.center.tall{width:auto;max-height:76%;max-width:42cqw}
+.letter{max-height:92%;max-width:94%}
+#ov.on .center,#ov.on .letter{transform:translate(-50%,-50%) scale(1);opacity:1}
+.pol{position:absolute;z-index:2;width:30cqw;transform:scale(0);transition:transform .6s cubic-bezier(.2,.9,.3,1.3);filter:drop-shadow(0 6px 8px #0005)}
+#ov.on .pol{transform:scale(1) rotate(var(--r))}
+#cake img{position:absolute;left:50%}
+#poster{z-index:6;top:3%;width:66cqw;transform:translateX(-50%) scale(.8);opacity:0;transition:opacity .9s,transform .9s cubic-bezier(.2,.9,.3,1.3)}
+#poster.on{opacity:1;transform:translateX(-50%) scale(1)}
+#max{bottom:-100%;height:48cqh;width:auto;max-width:90cqw;transform:translateX(-50%);transition:bottom 1.6s ease}
+#max.up{bottom:3%}
+#candles{position:absolute;left:50%;bottom:-110%;width:56cqw;aspect-ratio:1;transform:translateX(-50%);transition:bottom 1.6s cubic-bezier(.2,.8,.3,1)}
+#candles.up{bottom:14%}
+#candles img{left:0!important;width:100%}
+#blow{position:absolute;left:50%;bottom:3%;transform:translateX(-50%);font:inherit;font-size:5.4cqw;white-space:nowrap;background:var(--red);color:#fff;border:0;border-radius:999px;padding:.4em 1.4em;cursor:pointer;opacity:0;pointer-events:none;transition:opacity .8s;z-index:5;box-shadow:0 .8cqw 0 #8f3a3a}
+#blow.on{opacity:1;pointer-events:auto}
+#vid{position:absolute;z-index:1;left:50%;bottom:0;width:84cqw;transform:translateX(-50%);opacity:0;transition:opacity 1.4s;pointer-events:none}
+#vid.on{opacity:1}
+@media (prefers-reduced-motion:reduce){*{transition-duration:.01s!important}}
+</style></head><body>
+<div id="frame">
+<div id="mail" class="scene">
+ <div class="pat" id="pat"></div><div id="dim"></div>
+ <h1 id="hello">¡Parece que te ha llegado correo!</h1>
+ <div id="env" class="env" role="button" tabindex="0" aria-label="Abrir sobre">
+  <img class="dove" id="dove" alt="" src="assets/Dove.webp">
+  <div class="back"><svg viewBox="0 0 396 281"><rect width="395" height="281" fill="#8ED3FF"/></svg></div>
+  <div class="flap"><svg viewBox="0 0 396 209" preserveAspectRatio="none"><path d="M0 209L28 15C29 7 36 0 45 0H352C360 0 368 7 369 15L396 209Z" fill="#8ED3FF"/></svg></div>
+  <div id="pile"></div>
+  <div class="front"><svg viewBox="0 0 396 281"><path opacity=".8" d="M315 281L314 52C314 45 318 39 324 36L395 0V281Z" fill="#A0DAFF"/><path opacity=".8" d="M80 281L81 52C81 45 77 39 71 36L0 0V281Z" fill="#A0DAFF"/><path opacity=".8" d="M27 87C28 79 36 72 44 72H351C360 72 367 79 369 87L395 281H0Z" fill="#A0DAFF"/></svg></div>
+  <img class="seal" alt="mamano" src="assets/mamano.webp">
+ </div>
+ <p id="msg"></p>
+</div>
+<div id="cake" class="scene hidden">
+ <img id="poster" alt="Feliz Cumple 25" src="assets/FELIZ_CUMPLE.webp">
+ <img id="max" alt="" src="assets/MAX.webp">
+ <div id="candles"><img id="unlit" alt="" src="assets/CANDLE_UNLIT.webp" style="position:absolute"><img id="lit" alt="Velas" src="assets/CANDLE_LIT.webp" style="position:absolute"></div>
+ <button id="blow">Soplar velas</button>
+ <video id="vid" playsinline loop></video>
+</div>
+<div id="ov"></div>
+</div>
+<script>
+const IMG={
+ "Dove": "assets/Dove.webp",
+ "FELIZ_CUMPLE": "assets/FELIZ_CUMPLE.webp",
+ "MAX": "assets/MAX.webp",
+ "CANDLE_UNLIT": "assets/CANDLE_UNLIT.webp",
+ "CANDLE_LIT": "assets/CANDLE_LIT.webp",
+ "Letter": "assets/Letter.webp",
+ "mamano": "assets/mamano.webp",
+ "PICS_1": "assets/PICS_1.webp",
+ "PICS_2": "assets/PICS_2.webp",
+ "Brasil": "assets/Brasil.webp",
+ "Japon": "assets/Japon.webp",
+ "Bad_Bunny": "assets/Bad_Bunny.webp",
+ "ASTROBOY": "assets/ASTROBOY.webp",
+ "FCB": "assets/FCB.webp",
+ "SOCCER": "assets/SOCCER.webp",
+ "LIGHTNING_MCQUEEN": "assets/LIGHTNING_MCQUEEN.webp",
+ "RED_1": "assets/RED_1.webp",
+ "RED_2": "assets/RED_2.webp",
+ "RED_3": "assets/RED_3.webp",
+ "RED_4": "assets/RED_4.webp",
+ "BR1": "assets/BR1.webp",
+ "BR2": "assets/BR2.webp",
+ "BR3": "assets/BR3.webp",
+ "BR4": "assets/BR4.webp",
+ "JAP_1": "assets/JAP_1.webp",
+ "JAP_2": "assets/JAP_2.webp",
+ "JAP_3": "assets/JAP_3.webp",
+ "JAP_4": "assets/JAP_4.webp",
+ "BB1": "assets/BB1.webp",
+ "BB2": "assets/BB2.webp",
+ "BB3": "assets/BB3.webp",
+ "Brasil_up": "assets/Brasil_up.webp",
+ "Japon_up": "assets/Japon_up.webp",
+ "Bad_Bunny_up": "assets/Bad_Bunny_up.webp"
+};
+const VID="assets/cats.mp4",VIDW="assets/cats.webm",SONG="assets/bg_song.mp3";
+const bgm=new Audio(SONG);bgm.loop=true;bgm.volume=0;
+function fade(to,ms,done){const from=bgm.volume,t0=performance.now();requestAnimationFrame(function s(n){const k=Math.min(1,(n-t0)/ms);bgm.volume=Math.max(0,Math.min(1,from+(to-from)*k));if(k<1)requestAnimationFrame(s);else if(done)done()})}
+const $=s=>document.querySelector(s),sleep=ms=>new Promise(r=>setTimeout(r,ms));
+const ITEMS=[
+ {t:'Letter',big:'Letter',letter:1,b:42,l:11,w:78,r:0,z:1},
+ {t:'Fotos1',big:'PICS_1',tall:1,p:['BB3','BR2','JAP_3','BR4'],img:'PICS_1',b:46,l:-9,w:25,r:-3,z:2},
+ {t:'Fotos2',big:'PICS_2',tall:1,p:['JAP_4','BB2','JAP_1','BR1'],img:'PICS_2',b:46,l:83,w:23,r:3,z:2},
+ {t:'Brasil',big:'Brasil_up',p:['BR1','BR2','BR3','BR4'],img:'Brasil',b:52,l:2,w:38,r:-4,z:3},
+ {t:'Japon',big:'Japon_up',p:['JAP_1','JAP_2','JAP_3','JAP_4'],img:'Japon',b:54,l:31,w:38,r:3,z:4},
+ {t:'BB',big:'Bad_Bunny_up',p:['BB1','BB2','BB3'],img:'Bad_Bunny',b:52,l:58,w:40,r:-2,z:3}];
+const DO=['LIGHTNING_MCQUEEN','RED_2','ASTROBOY','RED_3','SOCCER','FCB','RED_1','RED_4'];
+(function(h){const n=3,m=4;
+ for(let a=0;a<n;a++)for(let b=0;b<m;b++){const im=new Image();im.src=IMG[DO[(a*3+b)%8]];
+  im.style.cssText=`left:${(a+Math.random()*.3-.1)/n*100}%;top:${(b+Math.random()*.3-.1)/m*100}%;transform:rotate(${Math.random()*40-20}deg)`;h.appendChild(im);}})($('#pat'));
+const pile=$('#pile'),env=$('#env'),seen=new Set();let ready=false,opened=false,cur=null;
+ITEMS.forEach((it,i)=>{const d=document.createElement('div');d.className='it';
+ d.style.cssText=`bottom:${it.b}%;left:${it.l}%;width:${it.w}%;--r:${it.r}deg;--z:${it.z};--d:${.2+i*.18}s`;
+ d.innerHTML=`<img alt="${it.t}" src="${IMG[it.img||it.big]}">`;
+ d.onclick=e=>{e.stopPropagation();if(ready)openView(it,d)};it.el=d;pile.appendChild(d);});
+function say(s){const m=$('#msg');m.style.opacity=0;setTimeout(()=>{m.textContent=s;m.style.opacity=s?1:0},360)}
+(async()=>{
+ await sleep(1200);env.classList.add('land');
+ await sleep(3300);$('#hello').style.opacity=0;$('#dove').classList.add('go');
+ await sleep(1300);$('#pat').classList.add('on');say('Haz click para abrir');ready=true;
+})();
+async function openEnv(){
+ if(!ready||opened)return;opened=true;ready=false;env.classList.add('open');bgm.play().then(()=>fade(.7,3000)).catch(()=>{});
+ await sleep(900);say('Este sobre parece estar lleno de memorias inolvidables.');
+ await sleep(3000);say('Veamos qué hay adentro!');
+ ITEMS.forEach(i=>i.el.style.setProperty('--d','0s'));
+ await sleep(2400);say('Haz click para dar un viaje en el tiempo');ready=true;
+}
+env.onclick=openEnv;env.onkeydown=e=>{if(e.key==='Enter'||e.key===' ')openEnv()};
+const SL=[[-1,3],[70,2],[0,66],[69,65]];
+function openView(it,el){
+ const v=$('#ov');cur={it,el};
+ v.innerHTML=`<img class="${it.letter?'letter':'center'+(it.tall?' tall':'')}" alt="" src="${IMG[it.big]}">`+(it.p||[]).map((n,i)=>`<img class="pol" alt="" src="${IMG[n]}" style="left:${SL[i][0]}%;top:${SL[i][1]}%;--r:${(i%2?1:-1)*(5+i*3)}deg;transition-delay:${.3+i*.13}s">`).join('');
+ requestAnimationFrame(()=>v.classList.add('on'));
+}
+$('#ov').onclick=async()=>{
+ $('#ov').classList.remove('on');if(!cur)return;
+ cur.el.classList.add('done');seen.add(cur.it.t);cur=null;
+ if(seen.size===ITEMS.length){ready=false;await sleep(900);finale();}
+};
+document.addEventListener('keydown',e=>{if(e.key==='Escape')$('#ov').click()});
+async function finale(){
+ say('');$('#dim').classList.add('on');await sleep(900);
+ env.classList.add('empty');await sleep(1100);
+ env.classList.remove('open');await sleep(2200);
+ $('#mail').classList.add('hidden');$('#cake').classList.remove('hidden');
+ await sleep(1800);$('#max').classList.add('up');
+ await sleep(2400);$('#poster').classList.add('on');
+ await sleep(2600);$('#max').classList.remove('up');
+ await sleep(500);$('#candles').classList.add('up');
+ await sleep(2200);$('#blow').classList.add('on');
+}
+$('#blow').onclick=async()=>{
+ $('#blow').classList.remove('on');
+ const l=$('#lit');l.style.transition='opacity 5s ease-in';l.style.opacity=0;
+ await sleep(5800);$('#candles').classList.remove('up');
+ await sleep(1200);fade(0,1200,()=>bgm.pause());const v=$('#vid');
+ if(VID){v.src=v.canPlayType('video/mp4; codecs="avc1.42E01E"')?VID:VIDW;v.classList.add('on');v.play().catch(()=>{v.controls=true});}
+};
+</script></body></html>
